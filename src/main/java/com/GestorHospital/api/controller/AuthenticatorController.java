@@ -8,22 +8,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000") // Cambiar según tu frontend
+@CrossOrigin(origins = "http://127.0.0.1:5500") // Cambiar según tu frontend
 public class AuthenticatorController {
 
     @Autowired
-    private AuthenticatorController authService;
+    private AuthenticationService authService; // ✅ inyectamos el servicio, no el controller
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            // El servicio valida las credenciales en la base de datos
+            // Llamada al servicio que valida las credenciales
             LoginResponse response = authService.authenticate(
-                loginRequest.getUsername(), 
-                loginRequest.getPassword()
+                    loginRequest.getEmail(), 
+                    loginRequest.getPassword()
             );
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
@@ -35,7 +34,7 @@ public class AuthenticatorController {
         }
     }
 
-    // Clase para respuestas de error
+    // Clase interna para respuestas de error
     public static class ErrorResponse {
         private String message;
 

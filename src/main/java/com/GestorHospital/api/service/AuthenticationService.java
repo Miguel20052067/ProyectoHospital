@@ -195,7 +195,7 @@ public class AuthenticationService {
         }
 
         // Buscar el usuario
-        User user = userRepository.findByEmail(eMail);
+        User user = userRepository.findByEmail(email);
 
         if (user == null) {
             throw new IllegalArgumentException("El usuario no existe");

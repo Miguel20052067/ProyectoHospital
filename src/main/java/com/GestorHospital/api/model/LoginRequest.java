@@ -1,37 +1,19 @@
-
 package com.GestorHospital.api.model;
 
 public class LoginRequest {
-    private String eMail;
+    private String email;
     private String password;
 
     public LoginRequest() {}
 
-    public LoginRequest(String eMail, String password) {
-        this.eMail = eMail;
+    public LoginRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String geteMail() {
-        return eMail;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-     @Override
-    public String toString() {
-        return "LoginRequest{" +
-                "email='" + eMail + '\'' +
-                '}';
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }
