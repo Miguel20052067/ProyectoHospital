@@ -1,4 +1,4 @@
-package main.java.com.GestorHospital;
+package com.GestorHospital;
 
 
 import org.springframework.boot.SpringApplication;
