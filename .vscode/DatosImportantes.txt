@@ -1,0 +1,50 @@
+1. Para ejecutarlo
+.\gradlew.bat bootRun
+2. Para limpiralo
+.\gradlew clean
+3.Dirección donde aparece la pagina
+http://localhost:8001
+
+Para crear la base de datos en mysql
+
+CREATE DATABASE IF NOT EXISTS ProyectoHospital;
+USE ProyectoHospital;
+CREATE TABLE casos_clinicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    edad INT,
+    sexo VARCHAR(20),
+    antecedentes_medicos TEXT,
+    antecedentes_quirurgicos TEXT,
+    habitos TEXT,
+    situacion_basal TEXT,
+    medicacion_actual TEXT,
+    antecedentes_familiares TEXT,
+    motivo TEXT,
+    sintomas TEXT,
+    exploracion_general TEXT,
+    signos TEXT,
+    resultados_pruebas TEXT,
+    razonamiento_clinico TEXT,
+    diagnostico_final TEXT,
+    tratamiento_farmacologico TEXT,
+    tratamiento_no_farmacologico TEXT,
+    factores_sociales TEXT,
+    alergias TEXT,
+    referencias_bibliograficas TEXT,
+    categoria VARCHAR(400),
+    keywords TEXT,
+    codigo_cie_10 TEXT,
+    dificultad VARCHAR(100),
+    chunk_id VARCHAR(100),
+    chunk TEXT
+);
+
+
+Este comando es para borrar todos los registros
+TRUNCATE TABLE casos_clinicos;
+
+Esto para resetear la contraseña sin problemas
+set password for'miguel2005' ='1234';
+
+Esto para saber si tienes todos los registros
+SELECT COUNT(*) FROM casos_clinicos;
