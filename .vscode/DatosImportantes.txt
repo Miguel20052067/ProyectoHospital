@@ -48,3 +48,6 @@ set password for'miguel2005' ='1234';
 
 Esto para saber si tienes todos los registros
 SELECT COUNT(*) FROM casos_clinicos;
+
+Librerias necesarias comando para lo de python
+pip install datasets pandas mysql-connector-python

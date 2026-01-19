@@ -5,16 +5,35 @@ import mysql.connector
 conn = mysql.connector.connect(
     host="localhost",
     user="miguel2005",
-    password="1234",
-    database="ProyectoHospital"
+    password="1234"
 )
 cursor = conn.cursor()
 
+# Crear la base de datos si no existe
+cursor.execute("CREATE DATABASE IF NOT EXISTS ProyectoHospital;")
+cursor.execute("USE ProyectoHospital;")  # Selecciona la base de datos recién creada
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS casos_clinicos (
+id INT AUTO_INCREMENT PRIMARY KEY, edad INT, sexo VARCHAR(20),
+antecedentes_medicos TEXT, antecedentes_quirurgicos TEXT, habitos TEXT,
+situacion_basal TEXT, medicacion_actual TEXT, antecedentes_familiares TEXT,
+motivo TEXT, sintomas TEXT, exploracion_general TEXT, signos TEXT,
+resultados_pruebas TEXT, razonamiento_clinico TEXT, diagnostico_final TEXT,
+tratamiento_farmacologico TEXT, tratamiento_no_farmacologico TEXT,
+factores_sociales TEXT, alergias TEXT, referencias_bibliograficas TEXT,
+categoria VARCHAR(400), keywords TEXT, codigo_cie_10 TEXT, dificultad VARCHAR(100),
+chunk_id VARCHAR(100), chunk TEXT
+);
+""")
+
+
+# Cargar dataset
 dataset = load_dataset("ilopezmon/casos_clinicos_completos")
 all_dfs = [pd.DataFrame(split) for split in dataset.values()]
 full_df = pd.concat(all_dfs, ignore_index=True)
-first_100 = full_df.head(3000)
+first_100 = full_df.head(100)
 
+# Función para insertar casos
 def insertar_caso(caso):
     sql = """
     INSERT INTO casos_clinicos (
@@ -45,6 +64,7 @@ cols = [
     'codigo_cie_10','dificultad','chunk_id','chunk'
 ]
 
+# Insertar los primeros 3000 casos
 for i, (_, row) in enumerate(first_100.iterrows(), start=1):
     caso_dict = row.to_dict()
     for col in cols:
@@ -58,7 +78,6 @@ for i, (_, row) in enumerate(first_100.iterrows(), start=1):
 
     insertar_caso(caso_dict)
     print(f"Caso {i} insertado correctamente.")
-
 
 cursor.close()
 conn.close()
