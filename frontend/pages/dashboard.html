@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediConnect - Evaluación de Casos Clínicos</title>
+    <link rel="stylesheet" href="./../css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header con menú de usuario -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <!-- Logo y título -->
+            <div class="header-left">
+                <div class="logo-small">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="42" y="20" width="16" height="60" rx="2" fill="currentColor"/>
+                        <rect x="20" y="42" width="60" height="16" rx="2" fill="currentColor"/>
+                        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3" fill="none" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="header-title">
+                    <h1>MediConnect</h1>
+                    <p>Evaluación de Casos Clínicos</p>
+                </div>
+            </div>
+
+            <!-- Usuario -->
+            <div class="header-right">
+                <div class="user-menu" id="userMenu">
+                    <button class="user-button" id="userButton">
+                        <div class="user-avatar" id="userAvatar">
+                            <span>MC</span>
+                        </div>
+                        <div class="user-info" id="userInfo">
+                            <span class="user-name">Cargando...</span>
+                            <span class="user-role">Médico Evaluador</span>
+                        </div>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú lateral desplegable -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <h3>Menú</h3>
+                <button class="sidebar-close" id="sidebarClose">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span>Evaluar Casos</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="currentColor" stroke-width="2"/>
+                        <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <path d="M9 12H15M9 16H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Mis Evaluaciones</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 3V16C3 17.1046 3.89543 18 5 18H16M21 21L16 16M16 16V21M16 16H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 10L12 6L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Estadísticas</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Configuración</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-button" id="logoutButton">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Información del caso -->
+            <div class="case-info">
+                <div class="case-header">
+                    <div class="case-number">
+                        <span class="label">Caso Clínico</span>
+                        <span class="number" id="caseNumber">#001</span>
+                    </div>
+                    <div class="case-progress">
+                        <span class="progress-text">Progreso de hoy</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                        <span class="progress-numbers">3 de 10 casos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso clínico -->
+            <div class="clinical-case-container">
+                <div class="case-card">
+                    <div class="case-content" id="caseContent">
+                        <h2>Paciente femenina de 45 años</h2>
+                        
+                        <div class="case-section">
+                            <h3>Motivo de Consulta</h3>
+                            <p>Paciente que acude a urgencias por dolor abdominal intenso en hipocondrio derecho de 6 horas de evolución, acompañado de náuseas y vómitos.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h3>Antecedentes Personales</h3>
+                            <p>Obesidad (IMC 32), dislipemia en tratamiento con estatinas. No alergias medicamentosas conocidas. No antecedentes quirúrgicos previos.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h3>Exploración Física</h3>
+                            <p>TA 135/85 mmHg, FC 92 lpm, Tª 37.8°C. Abdomen: dolor a la palpación en hipocondrio derecho con signo de Murphy positivo. No signos de irritación peritoneal. Ruidos hidroaéreos conservados.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h3>Pruebas Complementarias</h3>
+                            <p>Analítica: Leucocitos 13.500/μL con neutrofilia. Bilirrubina total 2.1 mg/dL. GOT 85 U/L, GPT 120 U/L. Ecografía abdominal: vesícula biliar distendida con litiasis múltiple y engrosamiento de pared vesicular (5mm). Vía biliar no dilatada.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h3>Diagnóstico</h3>
+                            <p>Colecistitis aguda litiásica.</p>
+                        </div>
+
+                        <div class="case-section">
+                            <h3>Plan Terapéutico</h3>
+                            <p>Ingreso hospitalario, dieta absoluta, sueroterapia, analgesia, antibioterapia empírica (ceftriaxona + metronidazol). Se programa colecistectomía laparoscópica en las próximas 24-48 horas tras estabilización del cuadro.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sistema de puntuación -->
+            <div class="rating-container">
+                <h3 class="rating-title">Evaluación del Caso Clínico</h3>
+                <p class="rating-subtitle">Puntúe cada aspecto del caso clínico del 1 al 5</p>
+
+                <div class="rating-grid">
+                    <!-- Rating 1 -->
+                    <div class="rating-item">
+                        <div class="rating-header">
+                            <label for="rating1">Precisión diagnóstica</label>
+                            <span class="rating-value" id="value1">3</span>
+                        </div>
+                        <div class="rating-slider">
+                            <input type="range" id="rating1" min="1" max="5" value="3" step="1" class="slider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating 2 -->
+                    <div class="rating-item">
+                        <div class="rating-header">
+                            <label for="rating2">Claridad textual</label>
+                            <span class="rating-value" id="value2">3</span>
+                        </div>
+                        <div class="rating-slider">
+                            <input type="range" id="rating2" min="1" max="5" value="3" step="1" class="slider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating 3 -->
+                    <div class="rating-item">
+                        <div class="rating-header">
+                            <label for="rating3">Relevancia clínica</label>
+                            <span class="rating-value" id="value3">3</span>
+                        </div>
+                        <div class="rating-slider">
+                            <input type="range" id="rating3" min="1" max="5" value="3" step="1" class="slider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating 4 -->
+                    <div class="rating-item">
+                        <div class="rating-header">
+                            <label for="rating4">Adecuación contextual</label>
+                            <span class="rating-value" id="value4">3</span>
+                        </div>
+                        <div class="rating-slider">
+                            <input type="range" id="rating4" min="1" max="5" value="3" step="1" class="slider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating 5 -->
+                    <div class="rating-item">
+                        <div class="rating-header">
+                            <label for="rating5">Nivel técnico adecuado</label>
+                            <span class="rating-value" id="value5">3</span>
+                        </div>
+                        <div class="rating-slider">
+                            <input type="range" id="rating5" min="1" max="5" value="3" step="1" class="slider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de validación -->
+                <div class="validation-section">
+                    <button class="validate-button" id="validateButton">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Validar y Siguiente Caso</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>
