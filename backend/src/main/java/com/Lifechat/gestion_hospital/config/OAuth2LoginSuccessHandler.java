@@ -26,9 +26,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                                        HttpServletResponse response, 
                                        Authentication authentication) throws IOException, ServletException {
         
-        System.out.println("\n🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢");
-        System.out.println("🟢  LOGIN EXITOSO - VERIFICANDO AUTORIZACIÓN");
-        System.out.println("🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢\n");
+        System.out.println("  LOGIN EXITOSO - VERIFICANDO AUTORIZACIÓN");
         
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
@@ -41,7 +39,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("📧 Email: " + email);
         
         if (email == null) {
-            System.err.println("\n❌ ERROR: Email es NULL");
+            System.err.println("\n ERROR: Email es NULL");
             System.out.println("==============================================\n");
             response.sendRedirect("/index.html?error=no_email");
             return;
@@ -54,11 +52,9 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("✅ ¿Está autorizado?: " + isAuthorized);
         
         if (!isAuthorized) {
-            System.err.println("\n❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌");
-            System.err.println("❌  ACCESO DENEGADO");
-            System.err.println("❌  Email: " + email);
-            System.err.println("❌  NO está en la whitelist");
-            System.err.println("❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌\n");
+            System.err.println(" ACCESO DENEGADO");
+            System.err.println(" Email: " + email);
+            System.err.println(" NO está en la whitelist");
             
             // Invalidar la sesión
             request.getSession().invalidate();
@@ -68,11 +64,9 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
         
-        System.out.println("\n✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅");
-        System.out.println("✅  ACCESO PERMITIDO");
-        System.out.println("✅  Email: " + email);
-        System.out.println("✅  Redirigiendo a dashboard...");
-        System.out.println("✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅\n");
+        System.out.println(" ACCESO PERMITIDO");
+        System.out.println(" Email: " + email);
+        System.out.println(" Redirigiendo a dashboard...");
         
         // Permitir acceso
         response.sendRedirect("/pages/dashboard.html");

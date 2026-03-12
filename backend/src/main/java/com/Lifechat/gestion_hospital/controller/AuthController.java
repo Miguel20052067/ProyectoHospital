@@ -1,3 +1,7 @@
+//Expone los endpoints relacionados con la autenticación, 
+// como obtener información del usuario autenticado, 
+// verificar el estado de autenticación, manejar el éxito del login y realizar logout manual.
+
 package com.Lifechat.gestion_hospital.controller;
 
 import org.springframework.http.ResponseEntity;

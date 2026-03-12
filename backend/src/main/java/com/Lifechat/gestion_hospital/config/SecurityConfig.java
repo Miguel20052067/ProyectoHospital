@@ -1,3 +1,6 @@
+//Seguriada centralizada de spring define que rutas son publicas y cuales privadas, 
+// ademas de configurar el login con google y el logout
+
 package com.Lifechat.gestion_hospital.config;
 
 import org.springframework.context.annotation.Bean;
@@ -20,12 +23,12 @@ public class SecurityConfig {
     
     public SecurityConfig(OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler) {
         this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
-        System.out.println("✅ SecurityConfig creado con OAuth2LoginSuccessHandler");
+        System.out.println(" SecurityConfig creado con OAuth2LoginSuccessHandler");
     }
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("🔧 Configurando SecurityFilterChain...");
+        System.out.println(" Configurando SecurityFilterChain...");
         
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -45,7 +48,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> {
-                System.out.println("🔧 Configurando OAuth2 Login con Success Handler...");
+                System.out.println(" Configurando OAuth2 Login con Success Handler...");
                 oauth2
                     .loginPage("/index.html")
                     .successHandler(oAuth2LoginSuccessHandler) // ← USAR EL HANDLER
@@ -63,7 +66,7 @@ public class SecurityConfig {
                 .frameOptions(frame -> frame.sameOrigin())
             );
         
-        System.out.println("✅ SecurityFilterChain configurado completamente");
+        System.out.println(" SecurityFilterChain configurado completamente");
         return http.build();
     }
     
