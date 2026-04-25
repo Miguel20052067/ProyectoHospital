@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeChat - Casos Clínicos</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>PrimarIA - LifeChat</h1>
+        <div class="nav-paginacion">
+            <button id="btn-anterior" onclick="cambiarPagina(-1)">← Anterior</button>
+            <span id="info-pagina"></span>
+            <button id="btn-siguiente" onclick="cambiarPagina(1)">Siguiente →</button>
+        </div>
+    </header>
+
+    <div class="layout">
+        <!-- IZQUIERDA: Caso clínico -->
+        <div class="panel-caso">
+            <div id="casos-container"></div>
+        </div>
+
+        <!-- DERECHA: Valoración -->
+        <div class="panel-valoracion">
+            <h2>Valoración</h2>
+            <p class="valoracion-caso-titulo" id="valoracion-caso-titulo">Selecciona un caso</p>
+            <p class="valoracion-desc">Selecciona un caso para valorarlo</p>
+
+            <div class="criterio">
+                <label>Precisión diagnóstica</label>
+                <div class="barra-container">
+                    <input type="range" min="1" max="5" value="1" class="barra" id="barra-precision"
+                        oninput="actualizarBarra('precision', this.value)">
+                    <span class="barra-valor" id="valor-precision">1/5</span>
+                </div>
+                <span class="puntuacion-texto" id="texto-precision">Sin valorar</span>
+            </div>
+
+            <div class="criterio">
+                <label>Claridad textual</label>
+                <div class="barra-container">
+                    <input type="range" min="1" max="5" value="1" class="barra" id="barra-claridad"
+                        oninput="actualizarBarra('claridad', this.value)">
+                    <span class="barra-valor" id="valor-claridad">1/5</span>
+                </div>
+                <span class="puntuacion-texto" id="texto-claridad">Sin valorar</span>
+            </div>
+
+            <div class="criterio">
+                <label>Relevancia clínica</label>
+                <div class="barra-container">
+                    <input type="range" min="1" max="5" value="1" class="barra" id="barra-relevancia"
+                        oninput="actualizarBarra('relevancia', this.value)">
+                    <span class="barra-valor" id="valor-relevancia">1/5</span>
+                </div>
+                <span class="puntuacion-texto" id="texto-relevancia">Sin valorar</span>
+            </div>
+
+            <div class="criterio">
+                <label>Adecuación contextual</label>
+                <div class="barra-container">
+                    <input type="range" min="1" max="5" value="1" class="barra" id="barra-adecuacion"
+                        oninput="actualizarBarra('adecuacion', this.value)">
+                    <span class="barra-valor" id="valor-adecuacion">1/5</span>
+                </div>
+                <span class="puntuacion-texto" id="texto-adecuacion">Sin valorar</span>
+            </div>
+
+            <div class="criterio">
+                <label>Nivel técnico</label>
+                <div class="barra-container">
+                    <input type="range" min="1" max="5" value="1" class="barra" id="barra-nivel"
+                        oninput="actualizarBarra('nivel', this.value)">
+                    <span class="barra-valor" id="valor-nivel">1/5</span>
+                </div>
+                <span class="puntuacion-texto" id="texto-nivel">Sin valorar</span>
+            </div>
+
+            <div class="valoracion-total">
+                <span>Media total:</span>
+                <span id="media-total">-</span>
+            </div>
+
+            <textarea id="comentario" placeholder="Comentario opcional..."></textarea>
+            <button class="btn-guardar" onclick="guardarValoracion()">Guardar valoración</button>
+        </div>
+
+    </div>
+    <script src="../js/casos.js"></script>
+</body>
+
+</html>
