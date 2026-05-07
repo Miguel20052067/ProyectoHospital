@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeChat - Casos Clínicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-900">
+    <main class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.22),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(29,78,216,0.24),_transparent_30%),linear-gradient(135deg,_#e0f2fe_0%,_#f8fafc_40%,_#dbeafe_100%)]">
+        </div>
+
+        <section class="relative min-h-screen px-4 py-4 sm:px-6 lg:px-8">
+            <div class="mx-auto flex min-h-[calc(100vh-2rem)] max-w-7xl flex-col overflow-hidden border border-white/60 bg-white/80 backdrop-blur">
+                <header class="flex flex-col gap-4 border-b border-slate-200 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <h1 class="text-2xl font-black text-slate-900">Casos clínicos</h1>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                        <div class="border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                            <span id="userEmail" class="font-bold text-slate-900">profesional@hospital.es</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="btn-anterior" onclick="cambiarPagina(-1)"
+                                class="border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50">
+                                ← Anterior
+                            </button>
+                            <span id="info-pagina" class="border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600"></span>
+                            <button id="btn-siguiente" onclick="cambiarPagina(1)"
+                                class="border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50">
+                                Siguiente →
+                            </button>
+                            <a href="../index.html" class="border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50">
+                                Salir
+                            </a>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="grid flex-1 gap-0 lg:grid-cols-[1.35fr_0.95fr]">
+                    <section class="border-b border-slate-200 bg-white p-6 lg:border-b-0 lg:border-r">
+                        <h2 id="valoracion-caso-titulo" class="mb-6 text-3xl font-black text-slate-900">Selecciona un caso</h2>
+
+                        <div id="casos-container" class="space-y-4"></div>
+                    </section>
+
+                    <aside class="bg-slate-50 p-6">
+                        <div class="border border-slate-200 bg-white p-6">
+                            <div class="flex items-center justify-between gap-4">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900">Valoración</h3>
+                                </div>
+                                <div class="border border-slate-200 bg-slate-50 px-4 py-3 text-right">
+                                    <p id="media-total" class="text-2xl font-black text-blue-700">-</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 space-y-4">
+                                <div class="criterio border border-slate-200 p-4">
+                                    <label class="block font-semibold text-slate-900">Precisión diagnóstica</label>
+                                    <div class="barra-container mt-3 flex items-center gap-3">
+                                        <input type="range" min="1" max="5" value="1" class="barra h-2 w-full cursor-pointer accent-blue-700"
+                                            id="barra-precision" oninput="actualizarBarra('precision', this.value)">
+                                        <span class="barra-valor border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700" id="valor-precision">1/5</span>
+                                    </div>
+                                    <span class="puntuacion-texto mt-2 block text-sm text-slate-600" id="texto-precision">Sin valorar</span>
+                                </div>
+
+                                <div class="criterio border border-slate-200 p-4">
+                                    <label class="block font-semibold text-slate-900">Claridad textual</label>
+                                    <div class="barra-container mt-3 flex items-center gap-3">
+                                        <input type="range" min="1" max="5" value="1" class="barra h-2 w-full cursor-pointer accent-blue-700"
+                                            id="barra-claridad" oninput="actualizarBarra('claridad', this.value)">
+                                        <span class="barra-valor border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700" id="valor-claridad">1/5</span>
+                                    </div>
+                                    <span class="puntuacion-texto mt-2 block text-sm text-slate-600" id="texto-claridad">Sin valorar</span>
+                                </div>
+
+                                <div class="criterio border border-slate-200 p-4">
+                                    <label class="block font-semibold text-slate-900">Relevancia clínica</label>
+                                    <div class="barra-container mt-3 flex items-center gap-3">
+                                        <input type="range" min="1" max="5" value="1" class="barra h-2 w-full cursor-pointer accent-blue-700"
+                                            id="barra-relevancia" oninput="actualizarBarra('relevancia', this.value)">
+                                        <span class="barra-valor border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700" id="valor-relevancia">1/5</span>
+                                    </div>
+                                    <span class="puntuacion-texto mt-2 block text-sm text-slate-600" id="texto-relevancia">Sin valorar</span>
+                                </div>
+
+                                <div class="criterio border border-slate-200 p-4">
+                                    <label class="block font-semibold text-slate-900">Adecuación contextual</label>
+                                    <div class="barra-container mt-3 flex items-center gap-3">
+                                        <input type="range" min="1" max="5" value="1" class="barra h-2 w-full cursor-pointer accent-blue-700"
+                                            id="barra-adecuacion" oninput="actualizarBarra('adecuacion', this.value)">
+                                        <span class="barra-valor border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700" id="valor-adecuacion">1/5</span>
+                                    </div>
+                                    <span class="puntuacion-texto mt-2 block text-sm text-slate-600" id="texto-adecuacion">Sin valorar</span>
+                                </div>
+
+                                <div class="criterio border border-slate-200 p-4">
+                                    <label class="block font-semibold text-slate-900">Nivel técnico adecuado</label>
+                                    <div class="barra-container mt-3 flex items-center gap-3">
+                                        <input type="range" min="1" max="5" value="1" class="barra h-2 w-full cursor-pointer accent-blue-700"
+                                            id="barra-nivel" oninput="actualizarBarra('nivel', this.value)">
+                                        <span class="barra-valor border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-bold text-slate-700" id="valor-nivel">1/5</span>
+                                    </div>
+                                    <span class="puntuacion-texto mt-2 block text-sm text-slate-600" id="texto-nivel">Sin valorar</span>
+                                </div>
+                            </div>
+
+                            <label for="comentario" class="mt-6 block text-sm font-semibold text-slate-700">Comentario clínico</label>
+                            <textarea id="comentario" rows="4" placeholder="Comentario opcional..."
+                                class="mt-2 w-full border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-100"></textarea>
+
+                            <button class="btn-guardar mt-6 w-full bg-blue-700 px-5 py-4 text-base font-bold text-white transition hover:bg-blue-800"
+                                onclick="guardarValoracion()">
+                                Guardar valoración
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const storedEmail = localStorage.getItem('primaria_user_email');
+        if (storedEmail) {
+            document.getElementById('userEmail').textContent = storedEmail;
+        }
+    </script>
+    <script src="../js/casos.js"></script>
+</body>
+
+</html>
